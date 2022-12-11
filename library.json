@@ -1,5 +1,5 @@
 {
-    "id": "{4456106D-D8B4-CE96-C506-2AA5B2426AD9}",
+    "id": "{BC11C6AA-77C6-44C1-A90F-1EC217226EC1}",
     "name": "HUE",
     "author": "Martin Kleinhans",
     "url": "https://github.com/tharit/IPSymconHue",
@@ -7,6 +7,6 @@
         "version": "5.5"
     },
     "version": "1.0",
-    "build": 1,
+    "build": 2,
     "date": 25
 }
