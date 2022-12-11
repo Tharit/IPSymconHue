@@ -1,0 +1,15 @@
+{
+	"id": "{DC45F8E5-7CDC-497C-9094-A2D0CCECFE28}",
+	"name": "HUEBridge",
+	"type": 2,
+	"vendor": "Philips",
+	"aliases": 
+	[
+		"Philips Hue"
+	],
+	"parentRequirements": [],
+	"childRequirements": ["{277C2551-9AB1-4943-BAD5-2887A1CA0409}"],
+	"implemented": ["{B8014CFA-5211-481A-8017-0B928FFF93A5}"],
+	"prefix": "HUE",
+    "url": "https://github.com/tharit/IPSymconHue"
+}
