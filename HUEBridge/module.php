@@ -46,7 +46,7 @@ class HUEBridge extends IPSModule
 
     public function UpdateState()
     {
-        $Data['DataID'] = '{B8014CFA-5211-481A-8017-0B928FFF93A5}';
+        $Data['DataID'] = '{277C2551-9AB1-4943-BAD5-2887A1CA0409}';
 
         $Buffer['Lights'] = $this->getAllLights();
 
