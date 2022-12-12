@@ -46,8 +46,8 @@ class HUEDevice extends IPSModule
             }
         }
 
-        if (property_exists($DeviceConfig, 'reachable')) {
-            $this->SetValue('Connected', $DeviceConfig->reachable);
+        if (property_exists($DeviceState, 'reachable')) {
+            $this->SetValue('Connected', $DeviceState->reachable);
         }
     }
 
