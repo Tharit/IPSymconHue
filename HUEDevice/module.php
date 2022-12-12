@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 class HUEDevice extends IPSModule
 {
-    use ColorHelper;
-
     public function Create()
     {
         //Never delete this line!
