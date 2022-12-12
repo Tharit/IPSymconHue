@@ -14,6 +14,8 @@ class HUEDevice extends IPSModule
         $this->ConnectParent('{B8014CFA-5211-481A-8017-0B928FFF93A5}');
         $this->RegisterPropertyString('HUEDeviceID', '');
         $this->RegisterPropertyString('DeviceType', 'lights');
+
+        $this->RegisterVariableBoolean("Connected", "Connected");
     }
 
     public function ApplyChanges()
@@ -27,7 +29,29 @@ class HUEDevice extends IPSModule
 
     public function ReceiveData($JSONString)
     {
-       
+        $Data = json_decode($JSONString);
+        $Buffer = json_decode($Data->Buffer);
+
+        $DeviceState = new stdClass();
+        $DeviceConfig = new stdClass();
+
+        if (property_exists($Buffer, 'Lights')) {
+            if (property_exists($Buffer->Lights, $this->ReadPropertyString('HUEDeviceID'))) {
+                if (property_exists($Buffer->Lights->{$this->ReadPropertyString('HUEDeviceID')}, 'state')) {
+                    $DeviceState = $Buffer->Lights->{$this->ReadPropertyString('HUEDeviceID')}->state;
+                }
+                if (property_exists($Buffer->Lights->{$this->ReadPropertyString('HUEDeviceID')}, 'config')) {
+                    $DeviceConfig = $Buffer->Lights->{$this->ReadPropertyString('HUEDeviceID')}->config;
+                }
+            } else {
+                $this->LogMessage('Device ID: ' . $this->ReadPropertyString('HUEDeviceID') . ' invalid', 10204);
+                return;
+            }
+        }
+
+        if (property_exists($DeviceConfig, 'reachable')) {
+            $this->SetValue('Connected', $DeviceConfig->reachable);
+        }
     }
 
     public function Request(array $Value)
