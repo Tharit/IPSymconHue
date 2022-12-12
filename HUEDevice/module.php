@@ -8,7 +8,7 @@ class HUEDevice extends IPSModule
     {
         //Never delete this line!
         parent::Create();
-        $this->ConnectParent('{B8014CFA-5211-481A-8017-0B928FFF93A5}');
+        $this->ConnectParent('{1D8FE7D7-A87A-4D95-A2C7-33B1F026E392}');
         $this->RegisterPropertyString('HUEDeviceID', '');
         $this->RegisterPropertyString('DeviceType', 'lights');
 
