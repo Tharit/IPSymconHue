@@ -9,7 +9,9 @@ class HUEBridge extends IPSModule
         //Never delete this line!
         parent::Create();
         $this->RegisterPropertyString('Host', '');
-        
+        $this->RegisterPropertyInteger('UpdateInterval', 3600);
+
+        $this->RegisterTimer('HUE_UpdateState', 0, 'PHUE_UpdateState($_IPS[\'TARGET\']);');
         $this->RegisterAttributeString('User', '');
     }
 
@@ -22,8 +24,10 @@ class HUEBridge extends IPSModule
             $this->SetStatus(200);
 
             $this->LogMessage('Error: Registration incomplete, please pair IP-Symcon with the Philips HUE Bridge.', KL_ERROR);
+            $this->SetTimerInterval('HUE_UpdateState', 0);
             return;
         }
+        $this->SetTimerInterval('HUE_UpdateState', $this->ReadPropertyInteger('UpdateInterval') * 1000);
     }
 
     public function ForwardData($JSONString)
@@ -38,6 +42,18 @@ class HUEBridge extends IPSModule
         }
         $this->SendDebug(__FUNCTION__, json_encode($result), 0);
         return json_encode($result);
+    }
+
+    public function UpdateState()
+    {
+        $Data['DataID'] = '{B8014CFA-5211-481A-8017-0B928FFF93A5}';
+
+        $Buffer['Lights'] = $this->getAllLights();
+
+        $Data['Buffer'] = json_encode($Buffer);
+
+        $Data = json_encode($Data);
+        $this->SendDataToChildren($Data);
     }
 
     public function registerUser()
