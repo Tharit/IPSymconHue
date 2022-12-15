@@ -11,7 +11,7 @@ class HUEBridge extends IPSModule
         $this->RegisterPropertyString('Host', '');
         $this->RegisterPropertyInteger('UpdateInterval', 3600);
 
-        $this->RegisterTimer('HUE_UpdateState', 0, 'PHUE_UpdateState($_IPS[\'TARGET\']);');
+        $this->RegisterTimer('HUE_UpdateState', 0, 'HUE_UpdateState($_IPS[\'TARGET\']);');
         $this->RegisterAttributeString('User', '');
     }
 
